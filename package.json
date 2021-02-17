@@ -21,6 +21,8 @@
     "@angular/router": "~11.0.9",
     "class-transformer": "^0.3.2",
     "class-validator": "^0.13.1",
+    "ngx-spinner": "^10.0.1",
+    "ngx-toastr": "^13.2.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

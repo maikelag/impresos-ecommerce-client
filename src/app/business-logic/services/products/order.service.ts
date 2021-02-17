@@ -18,6 +18,10 @@ export class OrderService {
     return this.http.get<OrderModel>(`${this.url}/orders`);
   }
 
+  getOrderById(orderId: string): Promise<OrderModel> {
+    return this.http.get<OrderModel>(`${this.url}/orders/${orderId}`).toPromise();
+  }
+
   removeOrder(orderId: string): Observable<OrderModel> {
     return this.http.delete<OrderModel>(`${this.url}/orders/${orderId}`);
   }

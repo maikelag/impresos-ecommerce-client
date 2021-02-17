@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../../environments/environment";
 import { Observable } from "rxjs";
-import { CategoryModel } from '../../models';
+import { CategoryModel, ProductModel } from '../../models';
 import { CategoryCreateDto } from '../../dtos';
 
 @Injectable({
@@ -32,5 +32,9 @@ export class CategoryService {
 
   updateCategory(categoryId: string, categoryData: CategoryCreateDto): Observable<CategoryModel> {
     return this.http.put<CategoryModel>(`${this.url}/categories/${categoryId}`, categoryData);
+  }
+
+  getProductsFromCategory(categoryName: string): Observable<ProductModel[]> {
+    return this.http.get<ProductModel[]>(`${this.url}/products/category/${categoryName}`)
   }
 }

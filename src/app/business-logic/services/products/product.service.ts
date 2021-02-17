@@ -14,7 +14,7 @@ export class ProductService {
     constructor(private http: HttpClient) {
     }
 
-    getAllProduucts(): Observable<ProductModel[]> {
+    getAllProducts(): Observable<ProductModel[]> {
         return this.http.get<ProductModel[]>(`${this.url}/products`);
     }
 
@@ -27,6 +27,10 @@ export class ProductService {
 
     getProductById(productId: string): Observable<ProductModel> {
         return this.http.get<ProductModel>(`${this.url}/products/${productId}`);
+    }
+
+    getProductsByCategory(categoryId: string): Observable<ProductModel[]> {
+        return this.http.get<ProductModel[]>(`${this.url}/products/category/${categoryId}`)
     }
 
     createProduct(productData: ProductCreateDto): Observable<ProductModel> {
