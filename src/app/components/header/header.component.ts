@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartModelServer } from 'src/app/business-logic/models/cart.model';
-import { CartService } from 'src/app/business-logic/services';
+import { CartService, UserService } from 'src/app/business-logic/services';
 
 @Component({
   selector: 'app-header',
@@ -11,11 +11,15 @@ export class HeaderComponent implements OnInit {
   cartData: CartModelServer;
   cartTotal: number;
 
-  constructor(private cartService: CartService) { }
+  authState: boolean;
+
+  constructor(private cartService: CartService, private userService: UserService) { }
 
   ngOnInit(): void {
     this.cartService.cartTotal$.subscribe(total => this.cartTotal = total);
     this.cartService.cartData$.subscribe(data => this.cartData = data);
+
+    this.userService.authState$.subscribe((authSate: boolean) => this.authState = this.authState)
   }
 
   deleteProductFromCart(index: number) {

@@ -18,6 +18,14 @@ import { ImageUploadComponent } from './components/image-upload/image-upload.com
 import { CartService } from './business-logic/services';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
+import { LoginComponent } from './components/login/login.component';
+import { ProfileComponent } from './components/profile/profile.component';
+
+import { FormsModule } from '@angular/forms';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import {
+  GoogleLoginProvider,
+} from 'angularx-social-login';
 
 @NgModule({
   declarations: [
@@ -30,6 +38,8 @@ import { ToastrModule } from 'ngx-toastr';
     ProductComponent,
     ThankyouComponent,
     ImageUploadComponent,
+    LoginComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,10 +48,31 @@ import { ToastrModule } from 'ngx-toastr';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    FormsModule,
     NgxSpinnerModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    SocialLoginModule
   ],
-  providers: [UserService, RoleService, PermissionService, ProductService, CartService],
+  providers: [
+    UserService,
+    RoleService,
+    PermissionService,
+    ProductService,
+    CartService,
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              'clientId'
+            )
+          },
+        ]
+      } as SocialAuthServiceConfig,
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
